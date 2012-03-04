@@ -1,0 +1,9 @@
+"Phrases"
+{
+	"nj_CPSound_Capture_Message"
+	{
+		"#format"	"{1:s}"
+		"en"			"[nj] Player {1} has reached a Control Point!"
+		"jp"			"[nj] {1} さんが、CPに到着しました!"
+	}
+}
