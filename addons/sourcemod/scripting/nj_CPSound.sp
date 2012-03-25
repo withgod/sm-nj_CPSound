@@ -10,7 +10,7 @@
 #include <sourcemod>
 #include <sdktools>
 
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define CAPTURE_SOUND_DEAULT "ambient/cow1.wav"
 
 new Handle:g_njCPSoundEnable = INVALID_HANDLE;
