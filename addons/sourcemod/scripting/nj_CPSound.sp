@@ -34,15 +34,20 @@ public OnPluginStart()
 	g_njCPSoundEnable = CreateConVar("nj_cpsound", "1", "cp sound Enable/Disable (0 = disabled | 1 = enabled)", 0, true, 0.0, true, 1.0);
 	g_njCPSoundFile   = CreateConVar("nj_cpsound_file", CAPTURE_SOUND_DEAULT, "capture sound(default ambient/cow1.wav)", 0);
 
-	//inilize only. because if change custom sound, download required
-	GetConVarString(g_njCPSoundFile, soundFile, sizeof(soundFile));	
+	HookConVarChange(g_njCPSoundFile, HandleSoundFile);
+	GetConVarSoundFile();
 
 	HookEvent("controlpoint_starttouch", OnCaptureEvent);
 }
 
-public OnMapStart()
+public HandleSoundFile(Handle:cvar, const String:oldVal[], const String:newVal[])
 {
-	maxclients = GetMaxClients();
+	GetConVarSoundFile();
+}
+
+public GetConVarSoundFile()
+{
+	GetConVarString(g_njCPSoundFile, soundFile, sizeof(soundFile));
 	if (!StrEqual(CAPTURE_SOUND_DEAULT, soundFile))
 	{
 		decl String:tmpPath[PLATFORM_MAX_PATH];
@@ -50,6 +55,12 @@ public OnMapStart()
 		AddFileToDownloadsTable(tmpPath);
 	}
 	PrecacheSound(soundFile);
+}
+
+public OnMapStart()
+{
+	maxclients = GetMaxClients();
+	GetConVarSoundFile();
 }
 
 public OnCaptureEvent(Handle:event, const String:name[], bool:dontBroadcast)
